@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
@@ -14,11 +16,19 @@ namespace StarterAssets {
 
             StartCoroutine(Post(
                                "https://rpc.testnet.near.org/",
-                               "{\n\t\"method\": \"query\",\n\t\"params\": {\n\t\t\"request_type\": \"call_function\",\n\t\t\"account_id\": \"dev-1663077383336-80416121270463\",\n\t\t\"method_name\": \"get_greeting\",\n\t\t\"args_base64\": \"e30=\",\n\t\t\"finality\": \"optimistic\"\n\t},\n\t\"id\": 132,\n\t\"jsonrpc\": \"2.0\"\n}",
+                               "{\n\t\"method\": \"query\",\n\t\"params\": {\n\t\t\"request_type\": \"call_function\",\n\t\t\"account_id\": \"dev-1663077383336-80416121270463\",\n\t\t\"method_name\": \"get_asset_bundles\",\n\t\t\"args_base64\": \"e30=\",\n\t\t\"finality\": \"optimistic\"\n\t},\n\t\"id\": 132,\n\t\"jsonrpc\": \"2.0\"\n}",
                                (json) => {
-                                   var url = ParseAssetBundleUrl(json);
-                                   StartCoroutine(LoadWorld(url));
+                                   var urls = ParseAssetBundleUrl(json);
+                                   StartCoroutine(LoadWorlds(urls));
                                }));
+        }
+
+        private IEnumerator LoadWorlds(string[] urls) {
+            foreach (var url in urls) {
+                StartCoroutine(LoadWorld(url));
+            }
+
+            return null;
         }
 
 
@@ -39,19 +49,22 @@ namespace StarterAssets {
             }
         }
 
-        string ParseAssetBundleUrl(string json) {
+        string[] ParseAssetBundleUrl(string json) {
             var response = JsonConvert.DeserializeObject<RpcResponse>(json);
-            var url = "";
-            var r = response.result.result;
-            for (int i = 1; i < r.Length - 1; i++) {
-                url += (char)r[i];
+            var text = "";
+            foreach (var ch in response.result.result) {
+                text += (char)ch;
             }
-            // foreach (var ch in response.result.result) {
-            //     url += (char)ch;
-            // }
 
-            Debug.Log("Parsed AssetBundle URL: " + url);
-            return url;
+            var pattern = "\\\"(.*?)\\\"";
+            var rg = new Regex(pattern);
+            var urls = rg.Matches(text).Select(m => m.Groups[1].Value).ToArray();
+            foreach (var url in urls) {
+                Debug.Log("url = " + url);
+            }
+
+            Debug.Log("Parsed AssetBundle URL: " + text);
+            return urls;
         }
 
         IEnumerator Post(string url, string bodyJsonString, Action<string> onSuccess) {
