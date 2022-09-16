@@ -60,5 +60,6 @@ crashlytics-build.properties
 
 /*_build/
 /*_build.zip
+!/webgl_build/
 /Assets/AssetBundles/
 /Assets/DLC/
