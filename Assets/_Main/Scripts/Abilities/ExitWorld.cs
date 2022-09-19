@@ -6,16 +6,22 @@ using _Main.Scripts.Abilities;
 using UnityEngine;
 
 public class ExitWorld : Ability {
+    const string ActionName = "Exit World";
+
     public override bool CanStartAbility() {
-        var spawnController = m_CharacterLocomotion.GetComponent<CharacterSpawnController>();
+        // var spawnController = m_CharacterLocomotion.GetComponent<CharacterSpawnController>();
+        var spawnController = WorldManager.Instance;
         var hasGrandParent = spawnController.CurrentWorld.Parent.ParentRef != null;
-        return base.CanStartAbility() && hasGrandParent;
+        return base.CanStartAbility()
+               && hasGrandParent
+               && playerInput.actions[ActionName].WasPressedThisFrame();
     }
 
     protected override void AbilityStarted() {
         base.AbilityStarted();
 
-        var spawnController = m_CharacterLocomotion.GetComponent<CharacterSpawnController>();
+        // var spawnController = m_CharacterLocomotion.GetComponent<CharacterSpawnController>();
+        var spawnController = WorldManager.Instance;
         var current = spawnController.CurrentWorld;
         var outer = current.Parent;
         var grandOuter = outer.Parent;
@@ -48,7 +54,8 @@ public class ExitWorld : Ability {
                     var tf = grandOuter.transform;
                     var spawn = outer.ParentRef.transform;
                     var scaleFactor = 1 / outer.ParentRef.transform.lossyScale.x;
-                    tf.position = outer.transform.position - scaleFactor * (spawn.position - tf.position) / tf.localScale.x;
+                    tf.position = outer.transform.position -
+                                  scaleFactor * (spawn.position - tf.position) / tf.localScale.x;
                     tf.localScale = Vector3.one * scaleFactor;
                     grandOuter.gameObject.SetActive(true);
 

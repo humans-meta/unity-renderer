@@ -10,7 +10,7 @@ public interface IHoverDetectable {
 }
 
 public class Hover : DetectObjectAbilityBase {
-    private float defaultMaxDistance = 3f;
+    private float defaultMaxDistance = 10f;
 
     public float Distance => m_RaycastResult.distance;
 
@@ -63,7 +63,7 @@ public class Hover : DetectObjectAbilityBase {
         }
     }
 
-    protected override void AbilityStopped(bool force) {
+    protected override void AbilityStopped() {
         EventHandler.ExecuteEvent(DetectedObject, "OnHover", false);
         EventHandler.ExecuteEvent("OnHover", DetectedObject, false);
         if (OriginalDetectedObject != DetectedObject) {
@@ -71,6 +71,6 @@ public class Hover : DetectObjectAbilityBase {
             EventHandler.ExecuteEvent("OnHover", OriginalDetectedObject, false);
         }
 
-        base.AbilityStopped(force);
+        base.AbilityStopped();
     }
 }

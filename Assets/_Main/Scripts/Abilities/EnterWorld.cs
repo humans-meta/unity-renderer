@@ -4,13 +4,17 @@ using System.Linq;
 using _Main.Scripts;
 using _Main.Scripts.Abilities;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class EnterWorld : Ability {
+    private const string ActionName = "Enter World";
+
     public override bool CanStartAbility() {
         var info = GetAbility<Hover>();
         return base.CanStartAbility()
                && info.IsActive
-               && info.DetectedObject.GetComponent<World>() != null;
+               && info.DetectedObject.GetComponent<World>() != null
+               && playerInput.actions[ActionName].WasPressedThisFrame();
     }
 
     protected override void AbilityStarted() {

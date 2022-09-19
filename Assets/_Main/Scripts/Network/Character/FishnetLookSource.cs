@@ -156,4 +156,5 @@ public class FishnetLookSource : NetworkBehaviour, ILookSource {
 }
 
 public interface ILookSource {
+    Vector3 LookDirection(bool b);
 }
