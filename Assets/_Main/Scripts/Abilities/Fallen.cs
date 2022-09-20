@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace _Main.Scripts.Abilities {
@@ -18,18 +19,13 @@ namespace _Main.Scripts.Abilities {
             }
 
             // Check whether there is ground underneath
-            RaycastHit hit = default;
-            if (m_CharacterLocomotion.SingleCast(-m_CharacterLocomotion.Up * MaxDistance, Vector3.zero, 0, ref hit)) {
+            var tf = m_CharacterLocomotion.transform;
+            var offset = new Vector3(0, 0.1f, 0);
+            var characterController = m_CharacterLocomotion.GetComponent<CharacterController>();
+            if (Physics.SphereCast(tf.position + offset, characterController.radius, -tf.up,
+                                   out var hit, MaxDistance, m_CharacterLocomotion.SolidObjectLayers)) {
                 return false;
             }
-
-            Debug.Log("hit = " + hit);
-
-            // if (Physics.Raycast(m_Transform.position, -m_CharacterLocomotion.Up, out var hit,
-            //                     MaxDistance, m_CharacterLayerManager.SolidObjectLayers,
-            //                     QueryTriggerInteraction.Ignore)) {
-            //     return false;
-            // }
 
             return true;
         }
@@ -37,15 +33,14 @@ namespace _Main.Scripts.Abilities {
         protected override void AbilityStarted() {
             base.AbilityStarted();
 
-            // var respawner = m_CharacterLocomotion.GetComponent<CharacterRespawner>();
-            // var spawn = WorldManager.Instance.CurrentWorld.spawn;
-            // SchedulerBase.Schedule(Delay, () => {
-            //     if (CanStartAbility()) {
-            //         respawner.Respawn(spawn.position, spawn.rotation, true);
-            //     }
-            //
-            //     StopAbility();
-            // });
+            var spawn = WorldManager.Instance.CurrentWorld.spawn;
+            Scheduler.Schedule(Delay, () => {
+                if (CanStartAbility()) {
+                    m_CharacterLocomotion.Respawn(spawn.position, spawn.rotation);
+                }
+
+                StopAbility();
+            });
         }
     }
 }
