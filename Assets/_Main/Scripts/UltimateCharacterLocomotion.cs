@@ -8,6 +8,7 @@ namespace _Main.Scripts {
         public int SolidObjectLayers;
         public bool Grounded { get; set; }
         public Vector3 Up { get; set; }
+        public Transform cameraRoot;
 
         private List<Ability> _abilities;
         private CharacterController _characterController;

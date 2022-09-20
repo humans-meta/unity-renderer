@@ -60,6 +60,8 @@ crashlytics-build.properties
 
 /*_build/
 /*_build.zip
+/linux_build*
+/UnityPlayer.so
 !/webgl_build/
 /Assets/AssetBundles/
 /Assets/DLC/

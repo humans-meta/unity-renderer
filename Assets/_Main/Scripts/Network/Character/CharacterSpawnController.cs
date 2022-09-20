@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Main.Scripts;
+using Cinemachine;
 using FishNet.Component.Transforming;
 using FishNet.Connection;
 using FishNet.Object;
@@ -18,6 +19,7 @@ public class CharacterSpawnController : NetworkBehaviour {
     public World CurrentWorld { get; set; }
 
     private UltimateCharacterLocomotion _characterLocomotion;
+    private CinemachineVirtualCamera _playerCamera;
 
     public override void OnStartClient() {
         base.OnStartClient();
@@ -29,7 +31,6 @@ public class CharacterSpawnController : NetworkBehaviour {
             var world = WorldManager.Instance.initialWorldRef.to;
             transform.SetParent(world.transform, true);
             EventHandler.ExecuteEvent("OnWorldDidChange", world);
-            // _characterLocomotion.SetPhysics(true);
         }
 
         gameObject.name = $"Player #{base.OwnerId}";
@@ -44,7 +45,6 @@ public class CharacterSpawnController : NetworkBehaviour {
         var world = WorldManager.Instance.initialWorldRef.to;
         var spawn = world.spawn;
         transform.SetPositionAndRotation(spawn.position, spawn.rotation);
-        // _characterLocomotion.SetPhysics(false);
     }
 
     private void OnDestroy() {

@@ -693,6 +693,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     Android: STARTER_ASSETS_PACKAGES_CHECKED
+    Server: STARTER_ASSETS_PACKAGES_CHECKED;FISHNET
     Standalone: STARTER_ASSETS_PACKAGES_CHECKED;FISHNET
     WebGL: FISHNET;STARTER_ASSETS_PACKAGES_CHECKED
   additionalCompilerArguments: {}
