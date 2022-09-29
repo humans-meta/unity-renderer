@@ -8,15 +8,19 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 
 namespace StarterAssets {
-    public class LoadAssetBundleTest : MonoBehaviour {
+    public class RemoteAssetsLoader : MonoBehaviour {
         private const string worldGameObjectName = "world";
+        public string accountId = "dev-1663077383336-80416121270463";
+        public string methodName = "get_asset_bundles";
 
         private void Start() {
-            // StartCoroutine(LoadWorld());
-
             StartCoroutine(Post(
                                "https://rpc.testnet.near.org/",
-                               "{\n\t\"method\": \"query\",\n\t\"params\": {\n\t\t\"request_type\": \"call_function\",\n\t\t\"account_id\": \"dev-1663077383336-80416121270463\",\n\t\t\"method_name\": \"get_asset_bundles\",\n\t\t\"args_base64\": \"e30=\",\n\t\t\"finality\": \"optimistic\"\n\t},\n\t\"id\": 132,\n\t\"jsonrpc\": \"2.0\"\n}",
+                               "{\n\t\"method\": \"query\",\n\t\"params\": {\n\t\t\"request_type\": \"call_function\",\n\t\t\"account_id\": \""
+                               + accountId
+                               + "\",\n\t\t\"method_name\": \""
+                               + methodName
+                               + "\",\n\t\t\"args_base64\": \"e30=\",\n\t\t\"finality\": \"optimistic\"\n\t},\n\t\"id\": 132,\n\t\"jsonrpc\": \"2.0\"\n}",
                                (json) => {
                                    var urls = ParseAssetBundleUrl(json);
                                    StartCoroutine(LoadWorlds(urls));
@@ -43,8 +47,7 @@ namespace StarterAssets {
             else {
                 AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
                 GameObject world = bundle.LoadAsset<GameObject>(worldGameObjectName);
-                Debug.Log("Instantiating remote AssetBundle: " + url
-                );
+                Debug.Log("Instantiating remote AssetBundle: " + url);
                 Instantiate(world);
             }
         }
