@@ -20,7 +20,7 @@ namespace _Main.Scripts.Abilities {
 
             // Check whether there is ground underneath
             var tf = m_CharacterLocomotion.transform;
-            var offset = new Vector3(0, 0.1f, 0);
+            var offset = new Vector3(0, 1f, 0);
             var characterController = m_CharacterLocomotion.GetComponent<CharacterController>();
             if (Physics.SphereCast(tf.position + offset, characterController.radius, -tf.up,
                                    out var hit, MaxDistance, m_CharacterLocomotion.SolidObjectLayers)) {
