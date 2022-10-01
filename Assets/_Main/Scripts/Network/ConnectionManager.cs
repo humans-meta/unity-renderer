@@ -14,15 +14,16 @@ public class ConnectionManager : MonoBehaviour {
 
     private void Start() {
 #if !UNITY_SERVER
-#if UNITY_EDITOR
+#if UNITY_EDITOR && false
         try {
             _networkManager.ServerManager.StartConnection();
         }
         catch {
             // ignored
         }
-#endif
+#else
         _networkManager.ClientManager.StartConnection();
+#endif
 #endif
     }
 }

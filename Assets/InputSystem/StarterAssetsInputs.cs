@@ -20,7 +20,7 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
+#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED && false
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
@@ -67,12 +67,12 @@ namespace StarterAssets
 		}
 
 		private void Start() {
-			SetCursorState(cursorLocked);
+			// SetCursorState(cursorLocked);
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
-			SetCursorState(cursorLocked);
+			// SetCursorState(cursorLocked);
 		}
 
 		private void SetCursorState(bool newState)

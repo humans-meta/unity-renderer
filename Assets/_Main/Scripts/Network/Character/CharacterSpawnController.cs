@@ -24,6 +24,8 @@ public class CharacterSpawnController : NetworkBehaviour {
     public override void OnStartClient() {
         base.OnStartClient();
 
+        Debug.Log("OnStartClient / base.Owner.ClientId = " + base.Owner.ClientId);
+
         EventHandler.ExecuteEvent(gameObject, "OnCharacterSpawned");
         if (base.IsOwner) {
             EventHandler.ExecuteEvent("OnLocalCharacterSpawned", gameObject);

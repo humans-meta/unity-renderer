@@ -1034,7 +1034,7 @@ GameObject:
   - component: {fileID: 6982812146204527121}
   - component: {fileID: 4416926081852918491}
   - component: {fileID: 4416926081852918490}
-  - component: {fileID: 135756642000475821}
+  - component: {fileID: 2758225642697494347}
   - component: {fileID: 4416926081852918493}
   - component: {fileID: 190479426}
   - component: {fileID: 190479433}
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67c8b33e424ccdc4486edf538ab91c5a, type: 3}
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
-  FootstepAudioVolume: 0.3
+  FootstepAudioVolume: 0
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.3
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
---- !u!114 &135756642000475821
+--- !u!114 &2758225642697494347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   _disableOnDespawn: 0
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 2
-  _scenePathHash: 394288251
+  _scenePathHash: 0
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 8315143319284220283
   _sceneNetworkObjects:
