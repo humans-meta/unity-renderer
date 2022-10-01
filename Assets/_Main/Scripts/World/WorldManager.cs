@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using FishNet;
 using FishNet.Managing;
 using FishNet.Object;
@@ -12,6 +13,18 @@ public class WorldManager : MonoBehaviour {
     public WorldRef initialWorldRef;
     public World CurrentWorld { get; private set; }
     public readonly Dictionary<string, World> WorldByName = new();
+
+    private CinemachineVirtualCamera virtualCamera;
+
+    public Transform LocalPlayer {
+        get {
+            if (virtualCamera == null) {
+                virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            }
+            return virtualCamera.Follow != null ? virtualCamera.Follow.parent : null;
+        }
+    }
+
 
     private void Awake() {
         Instance = this;
