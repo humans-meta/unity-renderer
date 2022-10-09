@@ -1,5 +1,5 @@
 ﻿#if UNITY_2020_3_OR_NEWER
-using FishNet.CodeAnalysis.Annotations;
+// using FishNet.CodeAnalysis.Annotations;
 #endif
 using FishNet.Connection;
 using FishNet.Documenting;
@@ -72,7 +72,7 @@ namespace FishNet.Object
         /// When as client only the method will run before OnStartClient.
         /// </summary>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnStartNetwork()
         {
@@ -85,7 +85,7 @@ namespace FishNet.Object
         /// When as client only this method will run after OnStopClient.
         /// </summary>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnStopNetwork()
         {
@@ -98,7 +98,7 @@ namespace FishNet.Object
         /// SyncTypes modified before or during this method will be sent to clients in the spawn message.
         /// </summary> 
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnStartServer()
         {
@@ -108,7 +108,7 @@ namespace FishNet.Object
         /// Called on the server before deinitializing this object.
         /// </summary>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnStopServer()
         {
@@ -120,7 +120,7 @@ namespace FishNet.Object
         /// </summary>
         /// <param name="prevOwner">Previous owner of this object.</param>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnOwnershipServer(NetworkConnection prevOwner)
         {
@@ -133,7 +133,7 @@ namespace FishNet.Object
         /// </summary>
         /// <param name="connection">Connection the object is being spawned for.</param>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnSpawnServer(NetworkConnection connection) { }
         /// <summary>
@@ -141,14 +141,14 @@ namespace FishNet.Object
         /// Useful for sending remote calls or actions to clients.
         /// </summary>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnDespawnServer(NetworkConnection connection) { }
         /// <summary>
         /// Called on the client after initializing this object.
         /// </summary>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnStartClient()
         {
@@ -158,7 +158,7 @@ namespace FishNet.Object
         /// Called on the client before deinitializing this object.
         /// </summary>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnStopClient()
         {
@@ -169,7 +169,7 @@ namespace FishNet.Object
         /// </summary>
         /// <param name="prevOwner">Previous owner of this object.</param>
 #if UNITY_2020_3_OR_NEWER
-        [OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
+        //[OverrideMustCallBase(BaseCallMustBeFirstStatement = true)]
 #endif
         public virtual void OnOwnershipClient(NetworkConnection prevOwner)
         {
